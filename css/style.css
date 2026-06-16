@@ -2,29 +2,32 @@
    DESIGN SYSTEM & CUSTOM TOKENS
    ============================================= */
 :root {
-    /* Color Palette */
-    --bg-dark: #050D1A;
-    --bg-dark-layered: radial-gradient(ellipse at 20% 40%, rgba(0,200,200,0.12) 0%, transparent 60%),
-                       radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.1) 0%, transparent 50%),
-                       radial-gradient(ellipse at 60% 80%, rgba(0,120,200,0.08) 0%, transparent 50%),
-                       #050D1A;
+    /* Color Palette (Ref: Pinterest Clinical Light Theme) */
+    --bg-dark: #F4F7FC; /* Very soft off-white/pale blue background */
+    --bg-dark-layered: radial-gradient(ellipse at 20% 40%, rgba(201, 76, 76, 0.08) 0%, transparent 60%),
+                       radial-gradient(ellipse at 80% 20%, rgba(0, 102, 204, 0.09) 0%, transparent 50%),
+                       radial-gradient(ellipse at 60% 80%, rgba(201, 76, 76, 0.07) 0%, transparent 50%),
+                       #F4F7FC;
     
-    --navy-card: #0A162B;
-    --navy-card-hover: #0E1E3A;
-    --navy-light: #162B4E;
+    --navy-card: #FFFFFF; /* Pure white crisp card background */
+    --navy-card-hover: #FAFCFF; /* Slightly highlighted hover background */
+    --navy-light: #E2E8F0; /* Soft slate border color */
     
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --gold-glow: rgba(201, 168, 76, 0.3);
+    --gold: #8E6B1D; /* Rich deep gold dark accent for perfect legibility on light background */
+    --gold-light: #725514; /* Deeper gold */
+    --gold-glow: rgba(142, 107, 29, 0.15);
     
-    --cyan-teal: #00C8C8;
-    --cyan-teal-light: #50E4E4;
-    --cyan-teal-glow: rgba(0, 200, 200, 0.25);
+    --cyan-teal: #0066CC; /* Bright medical blue */
+    --cyan-teal-light: #004C99; /* Deep blue */
+    --cyan-teal-glow: rgba(0, 102, 204, 0.1);
     
-    --white: #FFFFFF;
-    --text-primary: rgba(255, 255, 255, 0.95);
-    --text-muted: rgba(255, 255, 255, 0.65);
-    --text-dark: rgba(255, 255, 255, 0.4);
+    --white: #0F172A; /* Invert white variable (acting as primary black text) */
+    --text-primary: #1E293B; /* Slate-800 for primary text readability */
+    --text-muted: #475569; /* Slate-600 for muted description labels */
+    --text-dark: #94A3B8; /* Slate-400 */
+    --card-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    --card-shadow-hover: 0 10px 30px rgba(15, 23, 42, 0.1);
+    --border-color: rgba(15, 23, 42, 0.08);
     
     /* Typography */
     --font-display: 'Cormorant Garamond', serif;
@@ -151,29 +154,37 @@ ul {
 }
 
 /* =============================================
-   GLOWING BIOLOGY ASSETS
+   GLOWING BIOLOGY ASSETS (MICROSCOPIC ISLET CELLS)
    ============================================= */
 .islet-glowing-cluster {
     position: absolute;
-    border-radius: 50%;
     pointer-events: none;
     z-index: 0;
-    mix-blend-mode: screen;
+    mix-blend-mode: multiply;
     opacity: 0.45;
-    filter: blur(80px);
+    filter: blur(18px);
     transition: opacity 1s ease;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
 }
 
 .cluster-cyan {
-    background: radial-gradient(circle, rgba(0, 200, 200, 0.3) 0%, rgba(0, 200, 200, 0) 70%);
+    border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
+    background-image: radial-gradient(circle, rgba(220, 60, 100, 0.45) 0%, rgba(220, 60, 100, 0) 75%),
+                      url('../assets/images/islet_microscopy_bg.png');
 }
 
 .cluster-gold {
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.2) 0%, rgba(201, 168, 76, 0) 70%);
+    border-radius: 55% 45% 40% 60% / 40% 60% 50% 50%;
+    background-image: radial-gradient(circle, rgba(230, 80, 80, 0.4) 0%, rgba(230, 80, 80, 0) 75%),
+                      url('../assets/images/islet_microscopy_bg.png');
 }
 
 .cluster-blue {
-    background: radial-gradient(circle, rgba(0, 120, 200, 0.25) 0%, rgba(0, 120, 200, 0) 70%);
+    border-radius: 50% 50% 45% 55% / 55% 45% 55% 45%;
+    background-image: radial-gradient(circle, rgba(210, 50, 120, 0.4) 0%, rgba(210, 50, 120, 0) 75%),
+                      url('../assets/images/islet_microscopy_bg.png');
 }
 
 /* Floating animation keyframes */
@@ -219,12 +230,12 @@ ul {
 }
 
 .nav.scrolled {
-    background: rgba(5, 13, 26, 0.85);
+    background: rgba(255, 255, 255, 0.85);
     padding: 14px 32px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--card-shadow);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .nav-inner {
@@ -289,8 +300,7 @@ ul {
 }
 
 .nav-links a:hover {
-    color: var(--white);
-    text-shadow: 0 0 8px rgba(0, 200, 200, 0.5);
+    color: var(--cyan-teal);
 }
 
 .nav-links a:hover::after {
@@ -340,8 +350,6 @@ ul {
     display: flex;
     align-items: center;
     padding: 140px 24px 80px;
-    position: relative;
-    overflow: hidden;
 }
 
 .hero-grid {
@@ -458,19 +466,16 @@ ul {
     width: 320px;
     height: 400px;
     background-color: var(--navy-card);
-    border: 1px solid rgba(0, 200, 200, 0.3);
+    border: 1px solid rgba(0, 102, 204, 0.2);
     border-radius: var(--radius);
     padding: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
-                inset 0 0 20px rgba(0, 200, 200, 0.1);
+    box-shadow: var(--card-shadow);
     transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .scientific-frame:hover {
     border-color: var(--cyan-teal);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
-                0 0 25px rgba(0, 200, 200, 0.2),
-                inset 0 0 25px rgba(0, 200, 200, 0.15);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .photo-placeholder {
@@ -527,9 +532,9 @@ ul {
    ABOUT SECTION
    ============================================= */
 .about {
-    background-color: rgba(5, 13, 26, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    background-color: #FFFFFF;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .about-grid {
@@ -537,6 +542,134 @@ ul {
     grid-template-columns: 1.25fr 0.75fr;
     gap: 80px;
     align-items: start;
+}
+
+/* Profile Callout Panel (Pinterest/Sarah Reference Style) */
+.profile-callout-panel {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    height: 480px;
+    background: linear-gradient(180deg, #E0F2FE 0%, #FFFFFF 100%);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 24px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.panel-background-glow {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(201, 76, 76, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.panel-header-text {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: rgba(142, 107, 29, 0.16);
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.panel-image-wrapper {
+    width: 240px;
+    height: 330px;
+    border-radius: 120px 120px 12px 12px;
+    overflow: hidden;
+    border: 4px solid #FFFFFF;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    position: relative;
+    z-index: 2;
+}
+
+.panel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition);
+}
+
+.profile-callout-panel:hover .panel-image {
+    transform: scale(1.03);
+}
+
+/* Pointers & Tag Callouts */
+.pointer-callout {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+.callout-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    background: #FFFFFF;
+    padding: 5px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    white-space: nowrap;
+}
+
+.pointer-arrow {
+    width: 38px;
+    height: 22px;
+    stroke: var(--cyan-teal);
+    fill: none;
+    margin-top: 2px;
+}
+
+.pointer-arrow polygon {
+    fill: var(--cyan-teal);
+}
+
+/* Placement Coordinates */
+.callout-left-top {
+    top: 110px;
+    left: 10px;
+    align-items: flex-end;
+}
+
+.callout-right-mid {
+    top: 210px;
+    right: 10px;
+    align-items: flex-start;
+}
+
+.callout-left-bottom {
+    bottom: 90px;
+    left: 10px;
+    align-items: flex-end;
+}
+
+.about-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
 }
 
 .about-lead {
@@ -566,17 +699,17 @@ ul {
 
 .info-card {
     background: var(--navy-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
     border-top: 3px solid var(--gold);
     border-radius: var(--radius);
     padding: 32px;
+    box-shadow: var(--card-shadow);
     transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .info-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
-                0 0 15px rgba(201, 168, 76, 0.1);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .info-card-title {
@@ -593,7 +726,7 @@ ul {
     display: flex;
     gap: 16px;
     padding: 14px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color);
     font-size: 0.9rem;
 }
 
@@ -622,37 +755,53 @@ ul {
 /* =============================================
    "ISLETOLOGIST VIEWS" SECTION (SPECIAL BRANDED)
    ============================================= */
-.isletologist-views {
-    background-color: rgba(6, 15, 30, 0.75);
+.hero,
+.isletologist-views,
+.publications,
+.contact {
+    background-color: #FFFFFF;
     position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    overflow: hidden;
 }
 
-.definition-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 200, 200, 0.15);
-    border-left: 4px solid var(--cyan-teal);
-    border-radius: var(--radius-lg);
-    padding: 48px;
-    max-width: 900px;
-    margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(0, 200, 200, 0.05);
+.isletologist-views,
+.publications,
+.contact {
+    border-bottom: 1px solid var(--border-color);
 }
 
-.definition-card h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 20px;
+.hero::before,
+.isletologist-views::before,
+.publications::before,
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/images/islet_microscopy_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
+    filter: saturate(1.8) contrast(1.1);
 }
 
-.definition-card p {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    line-height: 1.8;
+.hero::before {
+    filter: saturate(1.8) contrast(1.1) blur(4px);
+}
+
+
+.hero .container,
+.isletologist-views .container,
+.publications .container,
+.contact .container {
+    position: relative;
+    z-index: 2;
 }
 
 .expertise-grid {
@@ -670,12 +819,13 @@ ul {
 }
 
 .expertise-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 200, 200, 0.15);
+    background: var(--navy-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 40px 32px;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--card-shadow);
     transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
                 border-color 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
                 box-shadow 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -686,8 +836,7 @@ ul {
 .expertise-card:hover {
     transform: translateY(-4px);
     border-color: var(--cyan-teal);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
-                0 0 25px rgba(0, 200, 200, 0.15);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .expertise-card-icon {
@@ -748,8 +897,8 @@ ul {
 }
 
 .quote-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--navy-card);
+    border: 1px solid var(--border-color);
     border-left: 4px solid var(--gold);
     border-radius: var(--radius-lg);
     padding: 48px 40px;
@@ -757,12 +906,14 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform var(--transition), background-color var(--transition);
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
 }
 
 .quote-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--navy-card-hover);
     transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .quote-large-mark {
@@ -800,8 +951,8 @@ ul {
    RESEARCH FOCUS SECTION
    ============================================= */
 .research {
-    background-color: rgba(5, 13, 26, 0.5);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    background-color: #F8FAFC;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .research-grid {
@@ -813,16 +964,16 @@ ul {
 .research-card {
     background: var(--navy-card);
     padding: 48px 40px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
     transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .research-card:hover {
     background: var(--navy-card-hover);
-    border-color: rgba(201, 168, 76, 0.3);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 
-                0 0 20px rgba(201, 168, 76, 0.05);
+    border-color: rgba(0, 102, 204, 0.3);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .research-icon {
@@ -875,8 +1026,7 @@ ul {
    PUBLICATIONS SECTION
    ============================================= */
 .publications {
-    background-color: rgba(5, 13, 26, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    /* Background styles consolidated in joint section styling for alternate microscopy bg */
 }
 
 .pub-list {
@@ -887,18 +1037,24 @@ ul {
     display: flex;
     align-items: flex-start;
     gap: 40px;
-    padding: 32px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    transition: background var(--transition), padding-left var(--transition);
+    background: var(--navy-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px 40px;
+    margin-bottom: 24px;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
-.pub-item:first-child {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+.pub-item:last-child {
+    margin-bottom: 0;
 }
 
 .pub-item:hover {
-    padding-left: 12px;
-    background: rgba(255, 255, 255, 0.01);
+    transform: translateY(-4px);
+    border-color: var(--cyan-teal);
+    box-shadow: var(--card-shadow-hover);
+    background: var(--navy-card-hover);
 }
 
 .pub-year {
@@ -944,8 +1100,8 @@ ul {
 
 .pub-link {
     font-size: 1.2rem;
-    color: var(--text-dark);
-    transition: color var(--transition), transform var(--transition);
+    color: var(--text-muted);
+    transition: color var(--transition), transform var(--transition), border-color var(--transition);
     flex-shrink: 0;
     margin-top: 4px;
     display: flex;
@@ -954,7 +1110,7 @@ ul {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
 }
 
 .pub-item:hover .pub-link {
@@ -973,8 +1129,8 @@ ul {
    AWARDS & HONOURS SECTION
    ============================================= */
 .awards {
-    background-color: rgba(5, 13, 26, 0.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    background-color: #F8FAFC;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .awards-grid {
@@ -987,16 +1143,17 @@ ul {
 .award-card {
     background: var(--navy-card);
     padding: 36px 28px;
+    border: 1px solid var(--border-color);
     border-bottom: 3px solid var(--gold);
     border-radius: var(--radius) var(--radius) 0 0;
+    box-shadow: var(--card-shadow);
     transition: transform var(--transition), box-shadow var(--transition), border-bottom-color var(--transition);
     position: relative;
 }
 
 .award-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 
-                0 0 20px rgba(201, 168, 76, 0.1);
+    box-shadow: var(--card-shadow-hover);
     border-bottom-color: var(--gold-light);
 }
 
@@ -1170,8 +1327,7 @@ ul {
    CONTACT SECTION
    ============================================= */
 .contact {
-    background-color: rgba(5, 13, 26, 0.5);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    /* Background styles consolidated in joint section styling for alternate microscopy bg */
 }
 
 .contact-grid {
@@ -1211,13 +1367,13 @@ ul {
 .contact-block a.email-link {
     font-family: var(--font-display);
     font-size: 1.4rem;
-    color: var(--white);
+    color: var(--cyan-teal);
     transition: color var(--transition);
     word-break: break-all;
 }
 
 .contact-block a.email-link:hover {
-    color: var(--cyan-teal);
+    color: var(--cyan-teal-light);
 }
 
 .contact-profile-buttons {
@@ -1232,23 +1388,24 @@ ul {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--navy-card);
+    border: 1px solid var(--border-color);
     color: var(--text-primary);
     padding: 12px 24px;
     border-radius: var(--radius);
     font-size: 0.85rem;
     font-weight: 500;
+    box-shadow: var(--card-shadow);
     transition: background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
     width: 100%;
     max-width: 280px;
 }
 
 .contact-btn:hover {
-    background: var(--navy-light);
+    background: var(--navy-card-hover);
     border-color: var(--cyan-teal);
-    color: var(--white);
-    box-shadow: 0 0 15px rgba(0, 200, 200, 0.15);
+    color: var(--cyan-teal);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .contact-btn svg {
@@ -1259,10 +1416,10 @@ ul {
 /* Contact Form Grid & Controls */
 .contact-form-card {
     background: var(--navy-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 44px 40px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--card-shadow);
     position: relative;
 }
 
@@ -1293,26 +1450,27 @@ ul {
 }
 
 .form-control {
-    background-color: rgba(5, 13, 26, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: #F8FAFC;
+    border: 1px solid var(--border-color);
     border-radius: var(--radius);
     padding: 14px 18px;
     font-family: var(--font-body);
     font-size: 0.95rem;
-    color: var(--white);
+    color: var(--text-primary);
     transition: border-color var(--transition), box-shadow var(--transition);
     width: 100%;
 }
 
 .form-control:focus {
     outline: none;
+    background-color: #FFFFFF;
     border-color: var(--cyan-teal);
-    box-shadow: 0 0 12px rgba(0, 200, 200, 0.2);
+    box-shadow: 0 0 12px rgba(0, 102, 204, 0.15);
 }
 
 select.form-control {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C9A84C' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%230066CC' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 18px center;
     padding-right: 44px;
@@ -1337,7 +1495,7 @@ textarea.form-control {
 .success-icon-wrap {
     width: 64px;
     height: 64px;
-    background-color: rgba(0, 200, 200, 0.1);
+    background-color: rgba(0, 102, 204, 0.05);
     border: 2px solid var(--cyan-teal);
     border-radius: 50%;
     display: flex;
@@ -1345,7 +1503,7 @@ textarea.form-control {
     justify-content: center;
     margin: 0 auto 24px;
     color: var(--cyan-teal);
-    box-shadow: 0 0 20px rgba(0, 200, 200, 0.2);
+    box-shadow: 0 0 20px rgba(0, 102, 204, 0.1);
 }
 
 .success-icon-wrap svg {
@@ -1393,39 +1551,39 @@ textarea.form-control {
 }
 
 .btn-primary {
-    background: var(--gold);
-    color: var(--bg-dark);
-    border-color: var(--gold);
+    background: var(--cyan-teal);
+    color: #FFFFFF;
+    border-color: var(--cyan-teal);
 }
 
 .btn-primary:hover {
-    background: var(--gold-light);
-    border-color: var(--gold-light);
-    box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+    background: var(--cyan-teal-light);
+    border-color: var(--cyan-teal-light);
+    box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
 }
 
 .btn-ghost {
     background: transparent;
-    color: var(--white);
-    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--text-primary);
+    border-color: var(--border-color);
 }
 
 .btn-ghost:hover {
+    background: var(--bg-dark);
     border-color: var(--cyan-teal);
     color: var(--cyan-teal);
-    box-shadow: 0 0 15px rgba(0, 200, 200, 0.15);
 }
 
 .btn-outline {
     background: transparent;
-    color: var(--gold);
-    border-color: var(--gold);
+    color: var(--cyan-teal);
+    border-color: var(--cyan-teal);
 }
 
 .btn-outline:hover {
-    background: rgba(201, 168, 76, 0.05);
-    border-color: var(--gold-light);
-    color: var(--gold-light);
+    background: rgba(0, 102, 204, 0.05);
+    border-color: var(--cyan-teal-light);
+    color: var(--cyan-teal-light);
 }
 
 .btn-sm {
@@ -1437,9 +1595,10 @@ textarea.form-control {
    FOOTER SECTION
    ============================================= */
 .footer {
-    background-color: #030810;
+    background-color: #FFFFFF;
+    color: var(--text-muted);
     padding: 64px 24px 48px;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid var(--border-color);
 }
 
 .footer-inner {
@@ -1475,20 +1634,20 @@ textarea.form-control {
 
 .footer-links a {
     font-size: 0.78rem;
-    color: var(--text-dark);
+    color: var(--text-muted);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     transition: color var(--transition);
 }
 
 .footer-links a:hover {
-    color: var(--gold);
+    color: var(--cyan-teal);
 }
 
 .footer-copy {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.25);
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-dark);
+    border-top: 1px solid var(--border-color);
     padding-top: 32px;
     width: 100%;
 }
@@ -1503,13 +1662,13 @@ textarea.form-control {
         right: -100%;
         width: 300px;
         height: 100vh;
-        background: #050D1A;
-        border-left: 1px solid rgba(255, 255, 255, 0.05);
+        background: #FFFFFF;
+        border-left: 1px solid var(--border-color);
         flex-direction: column;
         padding: 120px 48px;
         gap: 24px;
         transition: right var(--transition);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        box-shadow: -10px 0 30px rgba(15, 23, 42, 0.08);
     }
     
     .nav-links.active {
@@ -1530,7 +1689,7 @@ textarea.form-control {
 /* =============================================
    RESPONSIVE DESIGN GRIDS
    ============================================= */
-@media (max-width: 991px) {
+@media (max-width: 1100px) {
     :root {
         --section-pad: 80px;
     }
@@ -1579,6 +1738,11 @@ textarea.form-control {
         grid-template-columns: 1fr;
     }
     
+    .awards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 48px;
@@ -1595,6 +1759,11 @@ textarea.form-control {
 }
 
 @media (max-width: 767px) {
+    .about-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
     .hero-stats {
         flex-direction: column;
         gap: 16px;
@@ -1623,6 +1792,7 @@ textarea.form-control {
     .pub-item {
         flex-direction: column;
         gap: 12px;
+        padding: 24px 20px;
     }
     
     .pub-year {
