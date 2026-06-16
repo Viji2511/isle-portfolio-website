@@ -109,4 +109,4 @@ Then visit `http://localhost:8000` in your web browser.
 
 ## License
 
-This website is designed for the presentation of academic, research, and professional clinical achievements. All rights reserved &copy; 2025.
+This website is designed for the presentation of academic, research, and professional clinical achievements. All rights reserved &copy; 2026.

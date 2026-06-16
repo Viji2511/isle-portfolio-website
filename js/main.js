@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initial check on page load
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // -------------------------------------------------------------
     // MOBILE NAVIGATION DRAWER
@@ -36,20 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     };
 
-    navToggle.addEventListener('click', toggleMenu);
+    if (navToggle && navLinksContainer) {
+        navToggle.addEventListener('click', toggleMenu);
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
 
-    // Close menu when clicking outside of it
-    document.addEventListener('click', (e) => {
-        if (navLinksContainer.classList.contains('active') && 
-            !navLinksContainer.contains(e.target) && 
-            !navToggle.contains(e.target)) {
-            closeMenu();
-        }
-    });
+        // Close menu when clicking outside of it
+        document.addEventListener('click', (e) => {
+            if (navLinksContainer.classList.contains('active') && 
+                !navLinksContainer.contains(e.target) && 
+                !navToggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+    }
 
     // -------------------------------------------------------------
     // FADE-UP INTERSECTION OBSERVER
@@ -64,9 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, i) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    // Stagger the fade-in animation slightly for group elements
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, (i % 4) * 80);
                     observer.unobserve(entry.target); // Stop observing once visible
                 }
             });
@@ -76,6 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         // Fallback for browsers that don't support IntersectionObserver
         fadeElements.forEach(el => el.classList.add('visible'));
+    }
+
+    // -------------------------------------------------------------
+    // ACTIVE NAV HIGHLIGHT
+    // -------------------------------------------------------------
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-links a');
+
+    if (sections.length > 0 && navItems.length > 0 && 'IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navItems.forEach(a => a.classList.remove('active'));
+                    const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.4 });
+
+        sections.forEach(s => sectionObserver.observe(s));
     }
 
     // -------------------------------------------------------------
@@ -91,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Simple client-side validation check (HTML5 does most of it)
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
-            const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value.trim();
 
             if (!name || !email || !message) {
@@ -100,9 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Simulate sending progress (disable button)
             const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending Message...';
+            const originalBtnText = submitBtn ? submitBtn.textContent : 'Send Message';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending Message...';
+            }
 
             // Simulate API response delay
             setTimeout(() => {
@@ -116,8 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     successMessage.style.display = 'block';
                     // Reset form
                     contactForm.reset();
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalBtnText;
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalBtnText;
+                    }
                 }, 400);
 
             }, 1200);
